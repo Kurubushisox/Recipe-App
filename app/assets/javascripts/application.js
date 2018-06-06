@@ -12,5 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require jquery-ui
+//= require jquery.turbolinks
+//= require cocoon
+//= require popper
+//= require bootstrap-sprockets
 //= require_tree .
+//= require turbolinks
+
+
+
+// bootstrap tooltip
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});

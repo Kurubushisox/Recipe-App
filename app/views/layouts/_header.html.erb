@@ -1,0 +1,32 @@
+<header class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="container"><%= link_to 'Recipe App', root_path, class: 'navbar-brand' %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to 'ホーム', root_path, class: "nav-link#{is_active(root_path)}" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to '新着レシピ', recipes_path, class: "nav-link#{is_active(recipes_path)}" %>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            メニュー
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item disabled" href="/recipes/new">お気に入りレシピ</a>
+            <%= link_to 'レシピを書く', new_recipe_path, class: "dropdown-item#{is_active(new_recipe_path)}" %>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item disabled" href="#">ユーザー情報</a>
+          </div>
+        </li>
+      </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input disabled="disabled" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button disabled="disabled" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,16 @@
+<li class="nested-fields">
+  <%= f.hidden_field :sort_key, class: 'hidden-sort-key' %>
+  <div class="input-group d-flex">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fas fa-bars"></i></span>
+    </div>
+    <%#= f.label :ingredients, ' 材料' %>
+    <%= f.text_field :name, class: 'form-control', placeholder: '例：豚肉薄切り', style: 'flex: 7;' %>
+    <%#= f.label :ingredients, ' 分量' %>
+    <%= f.text_field :quantity, class: 'form-control', placeholder: '例：200g', style: 'flex: 2;', size: 6 %>
+    <div class="input-group-append">
+    <%= link_to_remove_association '×', f, class: 'close dynamic input-group-text', style: 'flex: 1;' %>
+    </div>
+  </div>
+</li>
+<%= f.hidden_field :_destroy, class: '_destroy' %>

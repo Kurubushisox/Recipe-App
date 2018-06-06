@@ -1,0 +1,43 @@
+<h1 style="float:left"><%= @recipe.name %></h1>
+<div class="h3" style="float:right; margin: 40px 0"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#destroyModal">削除</button></div>
+<div class="h3" style="float:right; margin: 40px 5px 0"><%= link_to '編集', edit_recipe_path, class: 'btn btn-primary' %></div>
+<p style="clear:both"><%= @recipe.summary %></p>
+
+<% if @recipe.post_image %>
+  <p><%= image_tag url_for(@recipe.post_image), style: 'max-width: 500px' %></p>
+<% end %>
+
+<p>調理時間： <%= @recipe.required_time %>分</p>
+<p>材料： <%= @recipe.serving_for %>人分</p>
+
+<ul class="list-group list-group-flush" style="margin: 30px 0">
+<%= render partial: 'recipe_ingredient', collection: @recipe.recipe_ingredients %>
+</ul>
+
+<ol class="list-group">
+<%= render partial: 'recipe_step', collection: @recipe.recipe_steps %>
+</ol>
+
+<!-- Modal -->
+<div class="modal fade" id="destroyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">確認</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= "『#{@recipe.name}』のレシピを削除してもよろしいですか？" %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        <%= link_to '削除', recipe_path, method: :delete, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= debug @recipe %>

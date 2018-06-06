@@ -1,0 +1,9 @@
+<h1>レシピを作成</h1>
+
+<%= content_for :title do %>
+  新しいレシピを作成
+<% end %>
+
+<%= render 'form', path: recipes_path, method: :post %>
+
+<%#= debug @recipe %>

@@ -1,0 +1,9 @@
+<h1>レシピを編集</h1>
+
+<%= content_for :title do %>
+  レシピを編集
+<% end %>
+
+<%= render 'form', path: recipe_path, method: :patch %>
+
+<%= debug @recipe %>

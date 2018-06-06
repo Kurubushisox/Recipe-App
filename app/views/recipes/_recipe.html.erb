@@ -1,0 +1,10 @@
+<li class="list-group-item d-flex" style="position: relative;">
+  <div style="flex: 10">
+    <b class="h4 d-block"><%= recipe.name %><%= link_to '', recipe, style: 'position: absolute; top: 0; left: 0; height: 100%; width: 100%' %></b>
+    <%= recipe.summary %>
+    <small class='d-block'><%= recipe.recipe_ingredients.pluck(:name).join(', ') %></small>
+  </div>
+    <% if recipe.post_image %>
+      <div style="flex: 1"><%= image_tag url_for(recipe.post_image), style: 'max-width: 180px' %></div>
+    <% end %>
+</li>

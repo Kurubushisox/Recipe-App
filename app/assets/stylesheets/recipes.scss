@@ -1,0 +1,105 @@
+// Place all the styles related to the recipes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Font Awesome
+.label.fas, .label.far {
+  padding-right: 1ex;
+}
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 0.6 !important;
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: transparent !important;
+}
+
+// Recipe new Forms, Recipe edit Forms
+
+// ingredients
+.ingredients li {
+  list-style-type: none;
+  margin-top: 5px;
+}
+
+.ingredients .input-group-prepend {
+  flex-shrink: 0;
+}
+
+// steps
+.steps .close {
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+// post image
+.post-image-frame {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.hide-image-input {
+  display: none;
+}
+
+// post image main
+.post-image-main {
+  background-image: url("/image/dummy_post_image.png");
+  width: 510px;
+  height: 510px;
+  margin: 50px 0;
+}
+
+.recipe-main-image-post {
+  background-color: rgba(255, 255, 255 , 0.7);
+  padding: 8px 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.recipe-main-image-post > small {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.recipe-main-image-input-wrap {
+  display: flex;
+}
+
+.recipe-main-image-post button {
+}
+
+.input-file-name {
+  padding-left: 10px;
+  background-color: transparent;
+  border: none;
+  flex: 1;
+}
+
+// post image step
+.post-image-step {
+  background-image: url('/image/dummy_post_image.png');
+  width: 140px;
+  height: 140px;
+  margin: 0 0 0 10px;
+  flex-shrink: 0;
+}
+
+.recipe-step-image-post {
+  padding: 0 3px 5px 3px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+// ingredients & steps add coulum control
+.add-column {
+  margin-top: 10px;
+  width: 100%;
+}

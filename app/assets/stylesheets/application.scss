@@ -1,3 +1,4 @@
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,3 +14,25 @@
  *= require_tree .
  *= require_self
  */
+
+@import 'bootstrap';
+@import 'jquery-ui/core';
+@import 'jquery-ui/sortable';
+
+h1 {
+  margin: 40px 0;
+}
+
+.flash {
+  margin: 20px 0;
+}
+
+.form_errors {
+  margin: 40px 0;
+}
+
+.debug_dump {
+  margin-top: 100px;
+  padding: 20px 15px;
+  border: solid 1px gray;
+}

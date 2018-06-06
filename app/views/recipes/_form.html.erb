@@ -1,0 +1,127 @@
+
+<script>
+// スクリプト仮置き
+// 投稿する画像をプレビュー
+function inputImagePreview (input) {
+  var file = $(input).prop('files')[0]
+  console.log(file);
+  if(!file.type.match(/^image\/(jpeg|png|gif)$/)) {
+    $(this).val('');
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function() {
+    var img_uri = reader.result;
+    $.when($(input).parents('.post-image-frame').fadeTo(200, 0)
+    ).done(function(){
+      $(input).parents('.post-image-frame').css('background-image', 'url(' + img_uri + ')').fadeTo(700, 1);
+    });
+  }
+  reader.readAsDataURL(file);
+}
+// Jquery Sortable
+$(function() {
+  $('.sortable').sortable({
+    cursor: 'row-resize'
+  });
+});
+
+
+ready = function(){
+  $('.cocoon-list').on('cocoon:before-remove', function(e, removed){
+    console.log(removed.next('._destroy').val(true));
+  });
+}
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+
+</script>
+
+<div>
+<%= form_for(@recipe, url: path, method: method) do |f| %>
+
+<%= render partial: 'layouts/form_errors', locals: { model: @recipe } %>
+
+  <div class="form-group">
+  <i class="label far fa-star"></i><%= f.label :name, 'レシピのタイトル（20文字以内）' %>
+  <%= f.text_field :name, class: 'form-control', placeholder: '例：豚肉の生姜焼き' %>
+  </div>
+
+  <div class="form-group">
+  <i class="label far fa-sticky-note"></i><%= f.label :summary, 'レシピの紹介文（140文字以内）' %>
+  <%= f.text_area :summary, class: 'form-control' , placeholder: "例：定番の生姜焼き。\n生姜の香りと甘辛いタレが食欲をそそります！" %>
+  </div>
+
+  <div class="form-group">
+    <div class="post-image-frame post-image-main shadow-sm"<%= " style=\"background-image: url(\'#{url_for @recipe.post_image}\')\"".html_safe  if @recipe.post_image.id %>>
+      <div class="recipe-main-image-post">
+        <div><i class="label far fa-image"></i><label for="recipe-main-image-input">料理の写真（正方形にリサイズして表示されます）</label></div>
+        <small>人や動物の写り込んだ写真やご自身に権利のない写真はご遠慮ください。</small>
+        <div class="recipe-main-image-input-wrap">
+        <%= f.fields_for :post_image do |img| %>
+          <%= img.file_field :image, id: 'recipe-main-image-input', class: 'hide-image-input', accept: 'image/jpeg, image/png, image/gif', onchange: 'inputImagePreview(this); $(\'.input-file-name\').val($(this).val().match(/([^\\\]+)$/)[0])' %>
+        <% end %>
+          <button type="button" class='btn btn-secondary' onClick="$('#recipe-main-image-input').click();">写真を選択</button>
+          <input class="input-file-name" readonly type="text" value=""  onClick="$('#file').click();">
+        </div>
+      </div>
+      </div>
+    </div>
+
+  <i class="label far fa-clock"></i><%= f.label :required_time, ' 作業時間の目安（任意）' %>
+  <div class="input-group mb-3">
+    <%= f.number_field :required_time, class: 'form-control' , maxlength: 3, min: '1', max:'999', placeholder: '例：15' %>
+    <div class="input-group-append">
+      <span class="input-group-text" id="basic-addon2">分</span>
+    </div>
+  </div>
+
+  <i class="label far fa-user"></i><%= f.label :serving_for, ' このレシピの材料は何人分ですか？' %>
+  <div class="input-group mb-3">
+    <%= f.number_field :serving_for, class: 'form-control' , maxlength: 3, min: '1', max: '100', placeholder: '例：1' %>
+    <div class="input-group-append">
+      <span class="input-group-text" id="basic-addon2">人分</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="d-flex">
+      <div class="" style="flex: 7; padding: 0.375rem 0.75rem;"><i class="label far fa-lemon"></i>材料</div>
+      <div class="" style="flex: 2; padding: 0.375rem 0.75rem;">分量</div>
+      <div class="" style="width: 41.89px;"></div>
+    </div>
+    <ul id="ingredient-association-insertion-point" class="cocoon-list ingredients sortable list-group">
+    <%= f.fields_for :recipe_ingredients do |ing| %>
+      <%= render 'recipe_ingredient_fields', f: ing %>
+    <% end %>
+    </ul>
+    <%= link_to_add_association ' 材料を追加', f, :recipe_ingredients, class: "add-column btn btn-secondary far fa-plus-square",
+      data: {
+        association_insertion_node: '#ingredient-association-insertion-point',
+        association_insertion_method: 'append'
+      }
+    %>
+  </div>
+
+  <div style="padding: 0.375rem 0.75rem 0;"><i class="label far fa-file-alt"></i>作りかた</div>
+  <div style="padding: 0 0.75rem 0.375rem;"><small>項目の外枠をドラッグして順番を入れ替えられます。</small></div>
+
+  <div class="form-group steps">
+    <ol id='step-association-insertion-point' class="cocoon-list sortable list-group">
+    <%= f.fields_for :recipe_steps do |i| %>
+      <%= render 'recipe_step_fields', f: i %>
+    <% end %>
+    </ol>
+    <%= link_to_add_association ' 作りかたを追加', f, :recipe_steps, class: "add-column btn btn-secondary far fa-plus-square",
+      data: {
+        association_insertion_node: '#step-association-insertion-point',
+        association_insertion_method: 'append'
+      }
+    %>
+  </div>
+  <div class="form-group">
+    <%= f.button 'レシピを登録する', type: 'button', class: 'btn btn-lg btn-primary', onClick: 'submit();' %>
+  </div>
+<% end %>
+</div>

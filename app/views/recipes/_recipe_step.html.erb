@@ -1,0 +1,6 @@
+<li class="list-group-item d-flex">
+  <div style="flex: 10"><%= simple_format h(recipe_step.content) %></div>
+  <% if recipe_step.post_image %>
+    <div style="flex: 1"><%= image_tag url_for(recipe_step.post_image), style: 'max-width: 180px' %></div>
+  <% end %>
+</li>

@@ -1,4 +1,29 @@
 Rails.application.routes.draw do
+
+  root 'static_pages#home'
+
+
+  resources :post_images, only: [:show]
+  get 'post_images/:id' => 'post_images#show', as: 'form_post_images'
+  get 'post_images/:id' => 'post_images#show', as: 'form_post_image'
+
+  resources :recipes, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+
+=begin
+  get 'recipes/new'
+
+  post 'recipes/create'
+  get 'recipes/create' => 'recipes#new'
+
+  get 'recipes/:id/edit' => 'recipes#edit'
+
+  get 'recipes/delete'
+
+  get 'recipes/create_dd' => 'recipes#create_dd'
+
+  get 'recipes/:id' => 'recipes#show'
+=end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

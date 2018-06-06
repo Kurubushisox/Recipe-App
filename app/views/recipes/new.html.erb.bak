@@ -1,0 +1,27 @@
+<h1>レシピを作成</h1>
+<%= form_for @recipe, url: {action: 'create'} do |f| %>
+  <%= f.label :name, 'レシピタイトル' %>
+  <%= f.text_field :name , placeholder: '例：豚肉の生姜焼き' %>
+  <%= f.label :summary, 'レシピの説明' %>
+  <%= f.text_area :summary , placeholder: "定番の生姜焼き。\n生姜の香りと甘辛いタレが食欲をそそります！" %>
+  <%= f.label :required_time, '調理時間' %>
+  <%= f.number_field :required_time , maxlength: 3, placeholder: '例：15' %>分
+  <div>
+    <%= f.label :serving_for, 'このレシピは何人分ですか？' %>
+    <%= f.number_field :serving_for , maxlength: 2, placeholder: '例：1' %>人分
+    <%= f.label :ingredients, '材料' %>
+    <%= f.text_field :ingredients , placeholder: '豚肉' %>
+    <%= f.label :ingredients, '分量' %>
+    <%= f.text_field :ingredients , placeholder: '120g' %>
+
+  </div>
+
+  <%#= fields_for :recipe_steps do |s| %>
+  <div>
+    <div>作りかた</div>
+    <%#= s.label :content, '1' %>
+    <%#= s.text_area :content , placeholder: "作り方の説明1" %>
+  </div>
+  <%# end %>
+  <%= f.submit 'レシピを投稿する', confirm: 'レシピを投稿してよろしいですか？' %>
+<% end %>

@@ -1,0 +1,16 @@
+<li class="nested-fields list-group-item">
+  <div class="d-flex">
+  <%= f.hidden_field :order, class: 'hidden-sort-key' %>
+  <%= f.text_area :content, class: 'form-control' %>
+    <div class="post-image-frame post-image-step shadow-sm"<%= " style=\"background-image: url(\'#{url_for f.object.post_image}\')\"".html_safe  if f.object.post_image.id %>>
+      <div class="recipe-step-image-post">
+        <%= f.fields_for :post_image do |img| %>
+          <%= img.file_field :image, class: 'hide-image-input', accept: 'image/jpeg, image/png, image/gif', onchange: 'inputImagePreview(this)' %>
+          <button type="button" class='btn btn-secondary btn-sm' onClick="$(this).prev().click();">写真を選択</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= link_to_remove_association '× 削除', f, class: 'close dynamic' %>
+</li>
+<%= f.hidden_field :_destroy, class: '_destroy' %>
