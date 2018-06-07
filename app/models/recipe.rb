@@ -1,4 +1,5 @@
 class Recipe < ActiveRecord::Base
+  REGISTRABLE_ATTRIBUTES = %i(name required_time summary serving_for private)
   belongs_to :user
   has_many :recipe_steps, dependent: :destroy
   has_many :recipe_ingredients, dependent: :destroy
@@ -19,6 +20,17 @@ class Recipe < ActiveRecord::Base
 
   validates :serving_for,
             numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
+
+  after_initialize do
+    3.times {recipe_ingredients.build} unless self.persisted? || recipe_ingredients.present?
+    2.times {recipe_steps.build} unless self.persisted? || recipe_steps.present?
+    build_post_image unless self.persisted? || post_image.present?
+  end
+
+  before_save do
+    self.name.gsub!(/\r\n|\r|\n|\s|\t/, "")
+    self.summary.gsub!(/\r\n|\r|\n|\s|\t/, "")
+  end
 
   def reject_recipe_ingredient(attributes)
     exists = attributes[:id].present?
