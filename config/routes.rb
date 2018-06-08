@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'users/show'
+
   root to: 'static_pages#home'
 
+  resources :users, only: [:show]
 
   resources :post_images, only: [:show]
   get 'post_images/:id' => 'post_images#show', as: 'form_post_images'
