@@ -13,6 +13,7 @@ class UsersController < ApplicationController
         .require(:user)
         .permit(
           User::REGISTRABLE_ATTRIBUTES,
-          post_image_attributes [PostImage::REGISTRABLE_ATTRIBUTES]
+          post_image_attributes: [PostImage::REGISTRABLE_ATTRIBUTES]
         )
+    end
 end
