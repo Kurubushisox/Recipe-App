@@ -41,7 +41,7 @@ $(document).on('page:load', ready);
 <div>
 <%= form_for(@recipe, url: path, method: method) do |f| %>
 
-<%= render partial: 'layouts/form_errors', locals: { model: @recipe } %>
+<%= render partial: 'shared/form_errors', locals: { object: @recipe } %>
 
   <div class="form-group">
   <i class="label far fa-star"></i><%= f.label :name, 'レシピのタイトル（20文字以内）' %>

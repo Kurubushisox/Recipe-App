@@ -1,9 +1,9 @@
-<% model.errors.full_messages.each_with_index do |msg, index| %>
+<% object.errors.full_messages.each_with_index do |msg, index| %>
   <% if index == 0 %>
     <div class="alert alert-danger form_errors">
     <div class="alert-heading h4">次の点を確認して修正してください</div>
     <hr>
   <% end %>
   <%= content_tag :div, msg %>
-  <%= '</div>'.html_safe if index == model.errors.full_messages.length - 1 %>
+  <%= '</div>'.html_safe if index == object.errors.full_messages.length - 1 %>
 <% end %>

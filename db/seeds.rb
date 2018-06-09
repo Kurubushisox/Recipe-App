@@ -21,7 +21,15 @@ make        = %w(唐揚げ 香草焼き フライ 姿焼き 煮付け ソテー 
 seasoning   = %w(醤油 みそ みりん 砂糖 塩 こしょう にんにく オリーブオイル コンソメ顆粒 鶏ガラスープのもと（顆粒） ごま油 粗挽き胡椒 バター チーズ 牛乳 小麦粉 片栗粉 ベーキングパウダー ウスターソース 中濃ソース マヨネーズ)
 scale       = %w(大さじ 小さじ カップ)
 
-
+class Recipe < ActiveRecord::Base
+end
+class RecipeStep < ActiveRecord::Base
+end
+class SeedPostImage < PostImage
+  def image=(param)
+    write_attribute(:image, param.read)
+  end
+end
 generation_count.times do |i|
 
   user_id     = i + 1
@@ -34,7 +42,7 @@ generation_count.times do |i|
 
   recipe = Recipe.new(user_id: user_id, name: recipe_name, required_time: rand(1..12) * 10, summary: "おいしい#{recipe_name}のつくりかたです", serving_for: rand(1..5))
   recipe.save validate: false
-  PostImage.create(image: recipe_image_file.read, mime_type: 'image/jpeg', imageable_id: recipe.id, imageable_type: 'Recipe')
+  SeedPostImage.create(image: recipe_image_file, mime_type: 'image/jpeg', imageable_id: recipe.id, imageable_type: 'Recipe')
 
 
   RecipeIngredient.create(recipe_id: recipe.id, name: ing, quantity: rand(10..90).to_s + '0グラム')
@@ -48,6 +56,6 @@ generation_count.times do |i|
     order = i + 1
     recipe_step_image_file  = File.new(sample_recipe_step_images.sample)
     recipe_step = RecipeStep.create(recipe_id: recipe.id, order: order, content: "\"STEP#{order}\" #{recipe_name}の作り方の説明文です。\n改行しました。\nユーザーが<b>HTMLタグを<br />入力しました。</b>\nユーザーが&copy;文字参照を入力しました。")
-                  PostImage.create(image: recipe_step_image_file.read, mime_type: 'image/jpeg', imageable_id: recipe_step.id, imageable_type: 'RecipeStep')
+                  SeedPostImage.create(image: recipe_step_image_file, mime_type: 'image/jpeg', imageable_id: recipe_step.id, imageable_type: 'RecipeStep')
   end
 end

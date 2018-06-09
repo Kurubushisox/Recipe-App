@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  REGISTRABLE_ATTRIBUTES = %i(email  password password_confirmation name)
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

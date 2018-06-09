@@ -20,6 +20,9 @@
             <%= link_to 'レシピを書く', new_recipe_path, class: "dropdown-item#{is_active(new_recipe_path)}" %>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item disabled" href="#">ユーザー情報</a>
+            <% if user_signed_in? %>
+            <%= link_to 'サインアウト', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            <% end %>
           </div>
         </li>
       </ul>
