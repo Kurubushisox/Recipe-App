@@ -9,7 +9,7 @@ class Recipe < ActiveRecord::Base
   accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true, reject_if: :reject_recipe_ingredient
   accepts_nested_attributes_for :post_image, allow_destroy: true, reject_if: proc {|attributes| attributes['image'].blank? }
 
-  validates :name, :serving_for, :post_image,
+  validates :name, :serving_for,
             presence: true
 
   validates :name,
@@ -30,6 +30,8 @@ class Recipe < ActiveRecord::Base
   before_save do
     self.name.gsub!(/\r\n|\r|\n|\s|\t/, "")
     self.summary.gsub!(/\r\n|\r|\n|\s|\t/, "")
+    recipe_ingredients.each{ |ingredient| ingredient.mark_for_destruction if ingredient.name.blank? }
+    recipe_steps.each{ |step| step.mark_for_destruction if step.content.blank? }
   end
 
   def reject_recipe_ingredient(attributes)
@@ -45,6 +47,7 @@ class Recipe < ActiveRecord::Base
     attributes.merge!(_destroy: true) if exists && empty
     !exists && empty
   end
+
 
 =begin
   # SQLでWHERE LIKEに渡すキーワードをエスケープする

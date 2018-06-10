@@ -29,8 +29,8 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: '変更したくない場合は空欄のままにしてください' %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :current_password, '現在のパスワード' %> <i>（アカウントの更新の確認ために現在のパスワードが必要です）</i><br />
+  <div class="form-group" style="margin-top: 50px;">
+    <%= f.label :current_password, '現在のパスワード', class: 'h5' %><br /><small>アカウントを更新するには、現在のパスワードが必要です</small><br />
     <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
   </div>
 

@@ -7,4 +7,8 @@ class RecipeStep < ActiveRecord::Base
   after_initialize {
     build_post_image unless self.persisted? || post_image.present?
   }
+
+  before_save do
+    post_image.mark_for_destruction if post_image.image.blank? 
+  end
 end
