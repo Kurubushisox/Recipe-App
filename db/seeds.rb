@@ -10,7 +10,8 @@
 user_generation_count = 5
 
 user_generation_count.times do |i|
-  User.create(name: "Test User #{i}", email: "test_user_#{i}@example.com", password: '111111')
+  user_id = i + 1
+  User.create(name: "Test User #{user_id}", email: "test_user_#{user_id}@example.com", password: '111111')
 end
 
 # レシピレコードの生成数
