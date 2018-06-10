@@ -26,3 +26,23 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
+
+
+// 投稿する画像をプレビュー
+function inputImagePreview (input) {
+  var file = $(input).prop('files')[0]
+  console.log(file);
+  if(!file.type.match(/^image\/(jpeg|png|gif)$/)) {
+    $(this).val('');
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function() {
+    var img_uri = reader.result;
+    $.when($(input).parents('.post-image-frame').fadeTo(200, 0)
+    ).done(function(){
+      $(input).parents('.post-image-frame').css('background-image', 'url(' + img_uri + ')').fadeTo(700, 1);
+    });
+  }
+  reader.readAsDataURL(file);
+}

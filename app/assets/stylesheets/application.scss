@@ -36,3 +36,15 @@ h1 {
   padding: 20px 15px;
   border: solid 1px gray;
 }
+
+// post image _________________________
+.post-image-frame {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.hide-image-input {
+  display: none;
+}
+// ____________________________________

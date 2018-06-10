@@ -35,17 +35,6 @@ textarea:focus::placeholder {
   font-size: 16px;
 }
 
-// post image
-.post-image-frame {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-}
-
-.hide-image-input {
-  display: none;
-}
-
 // post image main
 .post-image-main {
   background-image: url("/image/dummy_post_image.png");
