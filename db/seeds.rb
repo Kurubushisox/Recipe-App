@@ -7,9 +7,14 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-# レコードの生成数
-generation_count = 20
+user_generation_count = 5
 
+user_generation_count.times do |i|
+  User.create(name: "Test User #{i}", email: "test_user_#{i}@example.com", password: '111111')
+end
+
+# レシピレコードの生成数
+recipe_generation_count = 20
 
 # サンプルはjpegファイルのみ
 sample_recipe_images      = Dir.glob(Rails.root + "./test/fixtures/image/recipe/*jpg")
@@ -30,9 +35,9 @@ class SeedPostImage < PostImage
     write_attribute(:image, param.read)
   end
 end
-generation_count.times do |i|
+recipe_generation_count.times do |i|
 
-  user_id     = i + 1
+  user_id     = rand(1..user_generation_count)
 
   ing         = ingredients.sample
   mk          = make.sample
