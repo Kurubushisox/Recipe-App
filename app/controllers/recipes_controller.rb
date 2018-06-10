@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -14,7 +15,7 @@ class RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = current_user.recipes.new(recipe_params)
     if @recipe.save
       flash['notice'] = 'レシピを保存して公開しました。'
       redirect_to action: 'show', id: @recipe.id
