@@ -6,12 +6,30 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+class SeedPostImage < PostImage
+  def image=(param)
+    write_attribute(:image, param.read)
+  end
+end
+
+class Recipe < ActiveRecord::Base
+end
+
+class RecipeStep < ActiveRecord::Base
+end
+
 
 user_generation_count = 5
 
+sample_user_images      = Dir.glob(Rails.root + "./test/fixtures/image/user/*jpg")
+
 user_generation_count.times do |i|
-  user_id = i + 1
-  User.create(name: "Test User #{user_id}", email: "test_user_#{user_id}@example.com", password: '111111')
+  user_number = i + 1
+  user = User.create(name: "Test User #{user_number}", email: "test_user_#{user_number}@example.com", password: '111111')
+  if sample_user_images[i].present?
+    user_image_file = File.new(sample_user_images[i])
+    SeedPostImage.create(image: user_image_file, mime_type: 'image/jpeg', imageable_id: user.id, imageable_type: 'User')
+  end
 end
 
 # レシピレコードの生成数
@@ -27,15 +45,6 @@ make        = %w(唐揚げ 香草焼き フライ 姿焼き 煮付け ソテー 
 seasoning   = %w(醤油 みそ みりん 砂糖 塩 こしょう にんにく オリーブオイル コンソメ顆粒 鶏ガラスープのもと（顆粒） ごま油 粗挽き胡椒 バター チーズ 牛乳 小麦粉 片栗粉 ベーキングパウダー ウスターソース 中濃ソース マヨネーズ)
 scale       = %w(大さじ 小さじ カップ)
 
-class Recipe < ActiveRecord::Base
-end
-class RecipeStep < ActiveRecord::Base
-end
-class SeedPostImage < PostImage
-  def image=(param)
-    write_attribute(:image, param.read)
-  end
-end
 recipe_generation_count.times do |i|
 
   user_id     = rand(1..user_generation_count)
