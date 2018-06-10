@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: %i(index show)
+  before_action :set_recipe, only: %i(show edit update destroy)
 
   def index
     @recipes = Recipe.limit(20).order("created_at DESC")
