@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   before_save do
-    post_image.mark_for_destruction if post_image.image.blank?
+    post_image.mark_for_destruction if post_image && post_image.image.blank?
   end
 
 end
