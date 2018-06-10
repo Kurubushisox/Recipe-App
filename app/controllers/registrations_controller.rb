@@ -1,12 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_action :configure_permitted_parameters
 
   def after_sign_up_path_for(resource)
     user_path(resource)
   end
 
-  private
+  protected
 
-    def sign_up_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, post_image_attributes: [:image]])
+  end
 end

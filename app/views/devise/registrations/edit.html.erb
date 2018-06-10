@@ -5,6 +5,13 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render 'shared/form_errors', object: f.object %>
 
+  <%= f.fields_for :post_image do |img|  %>
+  <div class="form-group">
+    <%= img.label :image, 'プロフィール画像' %><br />
+    <%= img.file_field :image, class: '_hide-image-input', accept: 'image/jpeg, image/png, image/gif' %>
+  </div>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :name, 'ニックネーム' %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "nickname", class: 'form-control' %>

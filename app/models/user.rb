@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true, length: {maximum: 30}
 
   after_initialize do
-    build_post_image unless self.persisted? || post_image.present?
+    build_post_image unless post_image.present?
   end
 
   before_save do
