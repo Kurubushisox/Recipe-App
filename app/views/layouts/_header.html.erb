@@ -22,12 +22,12 @@
         <% else %>
         <li class="nav-item dropdown">
           <a class="dropdown-toggle btn btn-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= current_user.name %>
+            <%= current_user.name.truncate(12) %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item disabled" href="/recipes/new">お気に入りレシピ</a>
             <%= link_to 'レシピを書く', new_recipe_path, class: "dropdown-item#{is_active(new_recipe_path)}" %>
-            <%= link_to "#{current_user.name}さんのページ", user_path(current_user), class: "dropdown-item#{is_active(user_path(current_user))}" %>
+            <%= link_to "#{current_user.name.truncate(12)}さんのページ", user_path(current_user), class: "dropdown-item#{is_active(user_path(current_user))}" %>
             <div class="dropdown-divider"></div>
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
