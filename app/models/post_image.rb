@@ -2,8 +2,6 @@ class PostImage < ActiveRecord::Base
   REGISTRABLE_ATTRIBUTES = %i(id image _destroy)
   belongs_to :imageable, polymorphic: true
 
-  validates :image, presence: true
-
 # :imageをアップロードされたファイル本体に置き換える
 # :mime_typeを設定する
   def image=(param)
