@@ -5,10 +5,9 @@
 
 // post image user edit
 .post-image-user-edit {
-  background-image: url('/image/dummy_post_image.png');
+  background-image: url('user_lgray.png');
   width: 140px;
   height: 140px;
-  flex-shrink: 0;
 }
 
 .post-image-user-edit-control {
@@ -17,4 +16,14 @@
   bottom: 0;
   width: 100%;
   text-align: center;
+}
+
+// post image user helper
+
+.post-image-user {
+  background-image: url('user_lgray.png');
+  display: inline-block;
+  top: 0.25em;
+  width:  1.4em;
+  height: 1.4em;
 }

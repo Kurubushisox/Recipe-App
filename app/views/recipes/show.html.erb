@@ -1,4 +1,4 @@
-<h1 style="float:left"><span class="h6"><%= link_to @recipe.user.name, user_path(@recipe.user) %></span><br />
+<h1 style="float:left"><span class="h6"><div class="post-image-frame post-image-user rounded-circle border mr-2"<%= " style=\"background-image: url(\'#{url_for @recipe.user.post_image}\');\"".html_safe if @recipe.user.post_image.image.present? %>></div><%= link_to @recipe.user.name, user_path(@recipe.user) %></span><br />
   <%= @recipe.name %></h1>
 <div class="h3" style="float:right; margin: 40px 0"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#destroyModal">削除</button></div>
 <div class="h3" style="float:right; margin: 40px 5px 0"><%= link_to '編集', edit_recipe_path, class: 'btn btn-primary' %></div>

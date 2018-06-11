@@ -22,7 +22,7 @@
         <% else %>
         <li class="nav-item dropdown">
           <a class="dropdown-toggle btn btn-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= current_user.name.truncate(12) %>
+            <span class="post-image-frame post-image-user rounded-circle border mr-2" style="width: 1.1em; height: 1.1em; top: 0.18em;<%= " background-image: url('#{url_for current_user.post_image}');".html_safe if current_user.post_image.image.present? %>"></span><%= current_user.name.truncate(12) %>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item disabled" href="/recipes/new">お気に入りレシピ</a>
