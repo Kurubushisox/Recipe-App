@@ -49,7 +49,7 @@ class Recipe < ActiveRecord::Base
   end
 
 
-=begin
+
   # SQLでWHERE LIKEに渡すキーワードをエスケープする
   def self.escape_like(string)
     string.gsub(/[\\%_]/){|m| "\\#{m}"}
@@ -62,13 +62,11 @@ class Recipe < ActiveRecord::Base
 
     var_dump = []
     keywords.each do |keyword|
-      var_dump << "(name LIKE '%" + escape_like(keyword) + "%' ESCAPE '\\') OR (ingredients LIKE '%" + escape_like(keyword) + "%' ESCAPE '\\')"
+      var_dump << "(recipes.name LIKE '%" + escape_like(keyword) + "%' ESCAPE '\\') OR (recipe_ingredients.name LIKE '%" + escape_like(keyword) + "%' ESCAPE '\\')"
     end
 
     keyword_condition = var_dump.join(' AND ')
 
-    return self.where(keyword_condition)
+    return self.joins('LEFT OUTER JOIN recipe_ingredients ON recipes.id = recipe_ingredients.recipe_id').where(keyword_condition).distinct
   end
-=end
-
 end

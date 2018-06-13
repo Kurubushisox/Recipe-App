@@ -38,13 +38,19 @@
       <!--<form class="form-inline my-2 my-lg-0">
         <input disabled="disabled" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button disabled="disabled" class="btn btn-outline-primary my-2 my-sm-0 mr-sm-2" type="submit">Search</button>
-      </form>-->
+      </form>
         <form class="input-group form-inline my-2 my-lg-0" style="width: auto;">
-          <input disabled class="form-control" type="search" placeholder="Search" aria-label="Search" autofocus>
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search" autofocus>
           <div class="input-group-append">
-            <button disabled class="btn btn-secondary" type="submit">レシピ検索</button>
+            <button class="btn btn-secondary" type="submit">レシピ検索</button>
           </div>
-        </form>
+        </form>-->
+        <%= form_tag search_recipes_path, method: :get, enforce_utf8: false, class: 'input-group form-inline my-2 my-lg-0',  style: 'width: auto' do %>
+          <%= text_field_tag 'keywords', @keywords, placeholder: 'Search', class: 'form-control' %>
+          <div class="input-group-append">
+          <%= submit_tag 'Search', class: 'btn btn-secondary' %>
+          </div>
+        <% end %>
 
     </div>
   </nav>

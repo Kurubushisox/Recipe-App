@@ -3,11 +3,20 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: %i(show edit update destroy)
 
   def index
-    @recipes = Recipe.limit(20).order("created_at DESC")
+    @recipes = Recipe.limit(20).order('created_at DESC')
     flash.now[:warning] = 'レシピが見つかりませんでした' if @recipes.blank?
   end
 
   def show
+  end
+
+  def search
+    @keywords = params[:keywords]
+    unless @keywords.strip.empty?
+      @recipes = Recipe.search_recipe_by_keywords(@keywords.strip)
+    else
+      flash.now[:warning] = '検索キーワードが入力されていません'
+    end
   end
 
   def new

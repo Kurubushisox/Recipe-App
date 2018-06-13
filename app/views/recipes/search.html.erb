@@ -1,0 +1,6 @@
+<% if @recipes %>
+  <div class="h2 mt-5">"<%= @keywords %>"の検索結果 <small><%= @recipes.length %>件</small></div>
+  <ul class="list-group list-group-flush" style="margin: 40px 0">
+    <%= render @recipes %>
+  </ul>
+<% end %>

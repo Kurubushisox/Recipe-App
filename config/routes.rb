@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'post_images/:id', to: 'post_images#show', as: 'form_post_images'
   get 'post_images/:id', to: 'post_images#show', as: 'form_post_image'
 
+  get 'recipes/search', to: 'recipes#search', as: 'search_recipes'
   resources :recipes, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
