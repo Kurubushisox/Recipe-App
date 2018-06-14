@@ -46,9 +46,9 @@
           </div>
         </form>-->
         <%= form_tag search_recipes_path, method: :get, enforce_utf8: false, class: 'input-group form-inline my-2 my-lg-0',  style: 'width: auto' do %>
-          <%= text_field_tag 'keywords', @keywords, placeholder: 'Search', class: 'form-control' %>
+          <%= text_field_tag 'keywords', @keywords, id: 'search_input', placeholder: 'Search', class: 'form-control' %>
           <div class="input-group-append">
-          <%= submit_tag 'Search', class: 'btn btn-secondary' %>
+          <%= button_tag 'Search', type: 'button', onClick: "if(jQuery.trim($('#search_input').val()).replace(/\b/g, '') != ''){$(this).parents('form').submit()}".html_safe, class: 'btn btn-secondary' %>
           </div>
         <% end %>
 
