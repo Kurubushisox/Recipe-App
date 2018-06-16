@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :recipes, dependent: :destroy
   has_one  :post_image, as: :imageable, dependent: :destroy
+  has_many :likes
+  has_many :liked_recipes, through: :likes, source: :recipe
 
   accepts_nested_attributes_for :post_image, allow_destroy: true, reject_if: proc {|attributes| attributes['image'].blank? }
 
