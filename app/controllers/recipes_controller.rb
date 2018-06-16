@@ -37,6 +37,10 @@ class RecipesController < ApplicationController
   end
 
   def update
+    unless @recipe.user == current_user
+      redirect_to root_url
+      return
+    end
     if @recipe.update(recipe_params)
       flash['notice'] = 'レシピを更新して公開しました。'
       redirect_to action: 'show', id: @recipe.id
@@ -46,8 +50,12 @@ class RecipesController < ApplicationController
   end
 
   def destroy
+    unless @recipe.user == current_user
+      redirect_to root_url
+      return
+    end
     @recipe.destroy!
-    redirect_to root_path, notice: 'レシピを削除しました'
+    redirect_to root_url, notice: 'レシピを削除しました'
   end
 
   private
