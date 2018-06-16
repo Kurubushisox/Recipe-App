@@ -1,20 +1,21 @@
 Rails.application.routes.draw do
-  root to: 'static_pages#home'
+  root      to: 'static_pages#home'
 
-  devise_for :users, controllers: {
+  devise_for  :users, controllers: {
               registrations:  'registrations',
               sessions:       'sessions'}
 
   resources :users, only: [:show]
 
   resources :post_images, only: [:show]
-  get 'post_images/:id', to: 'post_images#show', as: 'form_post_images'
-  get 'post_images/:id', to: 'post_images#show', as: 'form_post_image'
+  get       'post_images/:id', to: 'post_images#show', as: 'form_post_images'
+  get       'post_images/:id', to: 'post_images#show', as: 'form_post_image'
 
-  get 'recipes/search', to: 'recipes#search', as: 'search_recipes'
+  get       'recipes/search', to: 'recipes#search', as: 'search_recipes'
   resources :recipes, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
-  resources :likes, only: [:create, :destroy]
+  post      'likes/:recipe_id/create',  to: 'likes#create'
+  delete    'likes/:recipe_id/destroy', to: 'likes#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

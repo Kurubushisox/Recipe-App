@@ -2,8 +2,10 @@
   <%= @recipe.name %></h1>
 <% if @recipe.user == current_user %>
 <div class="h3" style="float:right; margin: 40px 0"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#destroyModal">削除</button></div>
-<div class="h3" style="float:right; margin: 40px 5px 0"><%= link_to '編集', edit_recipe_path, class: 'btn btn-primary' %></div>
+<div class="h3" style="float:right; margin: 40px 5px 0 20px"><%= link_to '編集', edit_recipe_path, class: 'btn btn-primary' %></div>
 <% end %>
+<div class="float-right h2" style="margin: 40px 0 0"><%= render 'likes/like' %></div>
+
 <p style="clear:both"><%= @recipe.summary %></p>
 
 <% if @recipe.post_image %>

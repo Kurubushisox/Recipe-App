@@ -1,0 +1,5 @@
+<% unless Like.find_by(user_id: current_user.id, recipe_id: @recipe.id) %>
+<%= link_to '<i class="far fa-heart" style="color: gray" data-toggle="tooltip" data-placement="left" title="お気に入りレシピに追加"></i>'.html_safe, "/likes/#{@recipe.id}/create", {method: :post}%>
+<% else %>
+<%= link_to '<i class="fas fa-heart" style="color: orange" data-toggle="tooltip" data-placement="left" title="お気に入りレシピを解除"></i>'.html_safe, "/likes/#{@recipe.id}/destroy", {method: :delete}%>
+<% end %>
