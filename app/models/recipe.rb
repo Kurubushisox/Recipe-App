@@ -6,6 +6,7 @@ class Recipe < ActiveRecord::Base
   has_one  :post_image, as: :imageable, dependent: :destroy
   has_many :likes
   has_many :liked_by, through: :likes, source: :user
+  has_many :made_comments, dependent: :destroy
 
   accepts_nested_attributes_for :recipe_steps, allow_destroy: true, reject_if: :reject_recipe_step
   accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true, reject_if: :reject_recipe_ingredient
