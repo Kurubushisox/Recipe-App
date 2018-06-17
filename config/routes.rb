@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'made_comments/create'
+
+  get 'made_comments/destroy'
+
   root      to: 'static_pages#home'
 
   devise_for  :users, controllers: {
@@ -16,6 +20,9 @@ Rails.application.routes.draw do
 
   post      'likes/:recipe_id/create',  to: 'likes#create'
   delete    'likes/:recipe_id/destroy', to: 'likes#destroy'
+
+  post      'made_comments/:recipe_id/create',  to: 'made_comments#create'
+  delete    'made_comments/:recipe_id/destroy', to: 'made_comments#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
