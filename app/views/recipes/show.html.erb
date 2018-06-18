@@ -7,21 +7,52 @@
 <div class="float-right h2" style="margin: 40px 0 0"><%= render 'likes/like' %></div>
 
 <p style="clear:both"><%= @recipe.summary %></p>
+<div class="mt-4 mb-4">調理時間の目安： <%= @recipe.required_time %>分</div>
 
 <% if @recipe.post_image %>
   <p><%= image_tag url_for(@recipe.post_image), style: 'max-width: 500px' %></p>
 <% end %>
 
-<p>調理時間： <%= @recipe.required_time %>分</p>
-<p>材料： <%= @recipe.serving_for %>人分</p>
 
-<ul class="list-group list-group-flush" style="margin: 30px 0">
+<div class="h4 mt-5">材料 （<%= @recipe.serving_for %>人分）</div>
+<ul class="list-group list-group-flush mt-4">
 <%= render partial: 'recipe_ingredient', collection: @recipe.recipe_ingredients %>
 </ul>
 
-<ol class="list-group">
+
+<div class="h4 mt-5">作りかた</div>
+<ol class="list-group mt-4">
 <%= render partial: 'recipe_step', collection: @recipe.recipe_steps %>
 </ol>
+
+<div class="h4 mt-5">作ったよレポート</div>
+  <div class="mt-4">
+    <% @made_comments =  @recipe.made_comments.includes(:user) %>
+    <% if @made_comments.present? %>
+      <%= render partial: 'made_comments/made_comment', collection: @made_comments %>
+    <% else %>
+      <p>このレシピの作ったよレポートはまだありません。
+        <% if @recipe.user_id != current_user.id %><br />
+          <% unless user_signed_in?  %><%= link_to 'ログインして', new_user_session_path %><% end %>
+          最初のレポートを書きませんか？
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+
+
+<% if user_signed_in? && @recipe.user_id != current_user.id  %>
+  <div class="h5 mt-5">作ったよレポートを書く</div>
+  <div class="mt-3">
+  <%= form_for @recipe.made_comments.build, url: "/made_comments/#{@recipe.id}/create" do |f| %>
+  <div class="form-group"><%= f.text_field :content, class: 'form-control' %></div>
+  <%= f.submit '投稿する', class: 'btn btn-primary' %>
+  <% end %>
+  </div>
+<% end %>
+
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="destroyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
