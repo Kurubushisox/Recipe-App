@@ -32,9 +32,8 @@
       <%= render partial: 'made_comments/made_comment', collection: @made_comments %>
     <% else %>
       <p>このレシピの作ったよレポートはまだありません。
-        <% if @recipe.user_id != current_user.id %><br />
-          <% unless user_signed_in?  %><%= link_to 'ログインして', new_user_session_path %><% end %>
-          最初のレポートを書きませんか？
+        <% if user_signed_in? && @recipe.user_id != current_user.id %><br />
+          料理を実際に作って、最初のレポートを書きませんか？
         <% end %>
       </p>
     <% end %>
