@@ -1,3 +1,27 @@
 // Place all the styles related to the made_comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+// post image made comment post
+.post-image-made-comment-post {
+  background-image: url('dummy_post_image.png');
+  width: 140px;
+  height: 140px;
+}
+
+.post-image-made-comment-post-control {
+  padding: 0 3px 5px 3px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+// post image user
+
+.post-image-made-comment {
+  background-image: url('dummy_post_image.png');
+  width:  179px;
+  height: 179px;
+}

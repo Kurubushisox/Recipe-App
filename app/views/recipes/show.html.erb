@@ -48,8 +48,8 @@
   <div class="form-group mb-5">
     <%= f.fields_for :post_image do |img|  %>
     <%= img.label :image, '料理の写真' %>
-    <div class="post-image-frame post-image-user-edit shadow-sm"<%= " style=\"background-image: url(\'#{url_for f.object.post_image}\')\"".html_safe  if f.object.post_image.id %>>
-      <div class="post-image-user-edit-control">
+    <div class="post-image-frame post-image-made-comment-post shadow-sm"<%= " style=\"background-image: url(\'#{url_for f.object.post_image}\')\"".html_safe  if f.object.post_image.id %>>
+      <div class="post-image-made-comment-post-control">
         <%= img.file_field :image, class: 'hide-image-input', accept: 'image/jpeg, image/png, image/gif', onchange: 'inputImagePreview(this)' %>
         <button type="button" class='btn btn-secondary btn-sm' onClick="$(this).prev().click();">写真を選択</button>
       </div>
