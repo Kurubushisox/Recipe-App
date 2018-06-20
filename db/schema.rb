@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180617053131) do
+ActiveRecord::Schema.define(version: 20180620135421) do
 
   create_table "likes", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20180617053131) do
   end
 
   add_index "likes", ["user_id", "recipe_id"], name: "index_likes_on_user_id_and_recipe_id", unique: true
+
+  create_table "made_comment_replies", force: :cascade do |t|
+    t.integer  "user_id",                      null: false
+    t.integer  "made_comment_id",              null: false
+    t.string   "content",         default: "", null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
 
   create_table "made_comments", force: :cascade do |t|
     t.integer  "user_id",                 null: false

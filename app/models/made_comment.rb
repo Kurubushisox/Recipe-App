@@ -3,6 +3,7 @@ class MadeComment < ActiveRecord::Base
   belongs_to :user
   belongs_to :recipe
   has_one :post_image, as: :imageable, dependent: :destroy
+  has_one :made_comment_replie, dependent: :destroy
   accepts_nested_attributes_for :post_image, allow_destroy: true
 
   after_initialize {

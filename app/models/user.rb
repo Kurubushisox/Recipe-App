@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :liked_recipes, through: :likes, source: :recipe
   has_many :made_comments, dependent: :destroy
+  has_many :made_comment_replies, dependent: :destroy
 
   accepts_nested_attributes_for :post_image, allow_destroy: true, reject_if: proc {|attributes| attributes['image'].blank? }
 
