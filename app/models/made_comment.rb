@@ -10,12 +10,12 @@ class MadeComment < ActiveRecord::Base
     build_post_image unless self.persisted? || post_image.present?
   }
 
-  before_save :verify_user do
+  before_save :verify_user? do
     post_image.mark_for_destruction if post_image.image.blank?
   end
 
   private
-    def  verify_user
+    def  verify_user?
       self.user_id != self.recipe.user_id
     end
 end
