@@ -1,9 +1,21 @@
-<div class="card d-inline-block mb-2">
+<div class="card mb-2 mr-2" style="height: 500px;">
   <div class="card-image-top post-image-frame post-image-made-comment"<%= " style=\"background-image: url(\'#{url_for made_comment.post_image}\');\"".html_safe if made_comment.post_image %>></div>
   <div class="card-body">
       <div class="mb-1" style="font-size: 0.8em;"><div class="post-image-frame post-image-user rounded-circle border mr-2"<%= " style=\"background-image: url(\'#{url_for made_comment.user.post_image}\');\"".html_safe if made_comment.user.post_image.image.present? %>></div><%= link_to made_comment.user.name, user_path(made_comment.user) %></div>
       <p class="card-text">
       <%= made_comment.content %>
-      </p>
+    </p>
+      <% if made_comment.made_comment_reply %>
+        <hr />
+        <%= made_comment.made_comment_reply.content %>
+      <% elsif made_comment.recipe.user_id == current_user.id %>
+        <hr />
+        <%= form_for made_comment.build_made_comment_reply, url: "/made_comment_replies/#{made_comment.id}/create" do |f| %>
+        <%= f.text_area :content, class: 'form-control' %>
+        <div class="text-center">
+        <%= f.submit '返信を投稿', class: 'btn btn-primary btn-sm mt-2' %>
+        </div>
+        <% end %>
+      <% end %>
   </div>
 </div>

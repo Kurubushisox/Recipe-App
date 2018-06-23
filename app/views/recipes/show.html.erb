@@ -26,8 +26,8 @@
 </ol>
 
 <div class="h4 mt-5">作ったよレポート</div>
-  <div class="mt-4">
-    <% @made_comments =  @recipe.made_comments.includes(:user) %>
+  <div class="mt-4 d-flex flex-wrap">
+    <% @made_comments =  @recipe.made_comments.includes(:user, :made_comment_reply) %>
     <% if @made_comments.present? %>
       <%= render partial: 'made_comments/made_comment', collection: @made_comments %>
     <% else %>
