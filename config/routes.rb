@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'made_comments/create'
-
-  get 'made_comments/destroy'
 
   root      to: 'static_pages#home'
 
@@ -23,6 +20,9 @@ Rails.application.routes.draw do
 
   post      'made_comments/:recipe_id/create',  to: 'made_comments#create'
   delete    'made_comments/:recipe_id/destroy', to: 'made_comments#destroy'
+  post      'made_comment_replies/:made_comment_id/create',  to: 'made_comment_replies#create'
+  delete    'made_comment_replies/:made_comment_id/destroy', to: 'made_comment_replies#destroy'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
