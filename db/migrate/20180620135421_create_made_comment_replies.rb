@@ -7,6 +7,7 @@ class CreateMadeCommentReplies < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_foreign_key :made_comments_replies, :user_id
     add_foreign_key :made_comments_replies, :made_comment_id
   end
 end
