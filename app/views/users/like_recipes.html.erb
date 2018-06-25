@@ -1,0 +1,5 @@
+<h1 class="h3" style="clear: both;"><%= current_user.name %>さんのお気に入りレシピ</h1>
+<ul class="list-group list-group-flush" style="margin: 40px 0">
+  <%= render @recipes %>
+</ul>
+<%= paginate @recipes %>

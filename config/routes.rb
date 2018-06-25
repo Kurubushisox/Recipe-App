@@ -6,6 +6,7 @@ Rails.application.routes.draw do
               registrations:  'registrations',
               sessions:       'sessions'}
 
+  get       'users/like_recipes', to: 'users#like_recipes', as: 'like_recipes'
   resources :users, only: [:show]
 
   resources :post_images, only: [:show]

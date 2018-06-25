@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   def show
   end
 
+  def like_recipes
+    @recipes = current_user.liked_recipes.page(params[:page]).per(10)
+  end
+
   private
     def set_user
       @user = User.find(params[:id])
