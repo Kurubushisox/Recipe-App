@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
   def search
     @keywords = params[:keywords]
     unless @keywords.strip.empty?
-      @recipes = Recipe.search_recipe_by_keywords(@keywords.strip)
+      @recipes = Recipe.search_recipe_by_keywords(@keywords.strip).page(params[:page]).per(10)
     else
       flash.now[:warning] = '検索キーワードが入力されていません'
     end
