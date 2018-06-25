@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: %i(show edit update destroy)
 
   def index
-    @recipes = Recipe.limit(20).order('created_at DESC')
+    @recipes = Recipe.limit(100).order('created_at DESC').page(params[:page]).per(10)
     flash.now[:warning] = 'レシピが見つかりませんでした' if @recipes.blank?
   end
 
